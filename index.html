@@ -2,10 +2,108 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Juego Impostor</title>
+    <title>Juego Impostor Multi-Rondas</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        select, button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover, select:hover {
+            opacity: 0.8;
+        }
+        .oculto {
+            display: none;
+        }
+        #rolTexto {
+            margin-top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        #btnSiguiente {
+            margin-top: 20px;
+        }
+        #selectorRonda select {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+
+<!-- Selector de ronda -->
+<div id="selectorRonda" style="position:fixed; top:10px; right:10px; z-index:1000;">
+    <select id="selectRonda" onchange="irARonda()">
+        <option value="" disabled selected>Elegir ronda</option>
+        <!-- Solo números de ronda -->
+        <option value="1">Ronda 1</option>
+        <option value="2">Ronda 2</option>
+        <option value="3">Ronda 3</option>
+        <option value="4">Ronda 4</option>
+        <option value="5">Ronda 5</option>
+        <option value="6">Ronda 6</option>
+        <option value="7">Ronda 7</option>
+        <option value="8">Ronda 8</option>
+        <option value="9">Ronda 9</option>
+        <option value="10">Ronda 10</option>
+        <option value="11">Ronda 11</option>
+        <option value="12">Ronda 12</option>
+        <option value="13">Ronda 13</option>
+        <option value="14">Ronda 14</option>
+        <option value="15">Ronda 15</option>
+        <option value="16">Ronda 16</option>
+        <option value="17">Ronda 17</option>
+        <option value="18">Ronda 18</option>
+        <option value="19">Ronda 19</option>
+        <option value="20">Ronda 20</option>
+        <option value="21">Ronda 21</option>
+        <option value="22">Ronda 22</option>
+        <option value="23">Ronda 23</option>
+        <option value="24">Ronda 24</option>
+        <option value="25">Ronda 25</option>
+        <option value="26">Ronda 26</option>
+        <option value="27">Ronda 27</option>
+        <option value="28">Ronda 28</option>
+        <option value="29">Ronda 29</option>
+        <option value="30">Ronda 30</option>
+        <option value="31">Ronda 31</option>
+        <option value="32">Ronda 32</option>
+        <option value="33">Ronda 33</option>
+        <option value="34">Ronda 34</option>
+        <option value="35">Ronda 35</option>
+        <option value="36">Ronda 36</option>
+        <option value="37">Ronda 37</option>
+        <option value="38">Ronda 38</option>
+        <option value="39">Ronda 39</option>
+        <option value="40">Ronda 40</option>
+    </select>
+</div>
 
 <audio id="sonidoRol">
     <source src="reveal.mp3" type="audio/mpeg">

@@ -122,3 +122,17 @@ function mostrarFinal() {
 
     document.getElementById("final").appendChild(btnSiguienteRonda);
 }
+function irARonda() {
+    const select = document.getElementById("selectRonda");
+    const valor = parseInt(select.value);
+    if (!valor || valor < 1 || valor > palabrasRonda.length) return;
+
+    ronda = valor;
+
+    // Mostrar inicio del juego y ocultar todo lo demás
+    document.getElementById("inicio").classList.remove("oculto");
+    document.getElementById("juego").classList.add("oculto");
+    document.getElementById("final").classList.add("oculto");
+
+    iniciarJuego();
+}
