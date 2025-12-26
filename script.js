@@ -1,0 +1,124 @@
+let jugadores = [];
+let jugadorActual = 0;
+let rolVisible = false;
+let ronda = 1;
+
+// Array de palabras por ronda (1 a 40)
+const palabrasRonda = [
+    "Eren","Kamehameha","Doraemon","Charizar","Kakashi","Namek",
+    "Retumbar","Digievolucion","Megumi","Pochita","Dorayaki","Draken",
+    "Naruto","Death Note","Bachira","Tokito","Turbo vieja","Ghoul",
+    "Zoro","Akaza","Potara","Senku","Oliver/Tsubasa","Shoto Todoroki",
+    "Pokeball","Black clover","Boticaria","Aizawa","Ryuk","Erwin",
+    "Aldea de la hoja","Team Rocket","Caballeros del zodiaco","Nana",
+    "Kisaki","Zeno","Mewtwo","Fruta del diablo","Titan fundador","Sukuna"
+];
+
+function iniciarJuego() {
+    const numJugadores = parseInt(document.getElementById("numJugadores").value);
+    const numImpostores = parseInt(document.getElementById("numImpostores").value);
+
+    if (!numJugadores || numImpostores >= numJugadores) return;
+
+    let palabraNormal = palabrasRonda[ronda - 1];
+    jugadores = Array(numJugadores).fill(palabraNormal);
+
+    let asignados = 0;
+    while (asignados < numImpostores) {
+        const i = Math.floor(Math.random() * numJugadores);
+        if (jugadores[i] === palabraNormal) {
+            jugadores[i] = "Impostor";
+            asignados++;
+        }
+    }
+
+    jugadorActual = 0;
+    rolVisible = false;
+
+    document.getElementById("inicio").classList.add("oculto");
+    document.getElementById("juego").classList.remove("oculto");
+    document.getElementById("final").classList.add("oculto");
+
+    prepararJugador();
+}
+
+function prepararJugador() {
+    document.getElementById("jugadorTexto").innerText =
+        `Jugador ${jugadorActual + 1}`;
+
+    document.getElementById("rolTexto").innerText = "Toca para ver tu rol";
+
+    document.getElementById("btnSiguiente").classList.add("oculto");
+    rolVisible = false;
+}
+
+function mostrarRol() {
+    const rolTexto = document.getElementById("rolTexto");
+    const sonido = document.getElementById("sonidoRol");
+
+    if (!rolVisible) {
+        const rolReal = jugadores[jugadorActual];
+
+        rolTexto.innerText = rolReal;
+
+        sonido.currentTime = 0;
+        sonido.play();
+        rolVisible = true;
+    } else {
+        rolTexto.innerText = "Pasa el móvil al siguiente jugador";
+        document.getElementById("btnSiguiente").classList.remove("oculto");
+    }
+}
+
+function siguienteJugador() {
+    jugadorActual++;
+
+    if (jugadorActual < jugadores.length) {
+        prepararJugador();
+    } else {
+        mostrarFinal();
+    }
+}
+
+function mostrarFinal() {
+    document.getElementById("juego").classList.add("oculto");
+    document.getElementById("final").classList.remove("oculto");
+
+    const lista = document.getElementById("listaJugadores");
+    lista.innerHTML = "";
+
+    let palabraNormal = palabrasRonda[ronda - 1];
+
+    jugadores.forEach((rol, index) => {
+        const li = document.createElement("li");
+
+        li.innerText = `Jugador ${index + 1}`;
+
+        li.onclick = () => {
+            li.innerHTML = `Jugador ${index + 1} → <span style="color:${rol === "Impostor" ? "red" : "green"}">${rol === "Impostor" ? "Impostor" : "Buena gente"}</span>`;
+        };
+
+        lista.appendChild(li);
+    });
+
+    // Botón para siguiente ronda o reinicio
+    let btnSiguienteRonda = document.createElement("button");
+    btnSiguienteRonda.style.marginTop = "20px";
+
+    if (ronda < palabrasRonda.length) {
+        btnSiguienteRonda.innerText = `Ronda ${ronda + 1}`;
+        btnSiguienteRonda.onclick = () => {
+            ronda++;
+            iniciarJuego();
+        };
+    } else {
+        btnSiguienteRonda.innerText = "Reiniciar Juego";
+        btnSiguienteRonda.onclick = () => {
+            ronda = 1;
+            document.getElementById("final").classList.add("oculto");
+            document.getElementById("inicio").classList.remove("oculto");
+        };
+    }
+
+    document.getElementById("final").appendChild(btnSiguienteRonda);
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego Impostor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<audio id="sonidoRol">
+    <source src="reveal.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="inicio">
+    <select id="numJugadores">
+        <option value="" disabled selected>Número de jugadores</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+
+    <select id="numImpostores">
+        <option value="1">1 impostor</option>
+        <option value="2">2 impostores</option>
+        <option value="3">3 impostores</option>
+    </select>
+
+    <button onclick="iniciarJuego()">Ronda 1</button>
+</div>
+
+<div class="container oculto" id="juego">
+    <h1 id="jugadorTexto"></h1>
+
+    <h2 id="rolTexto" class="rol" onclick="mostrarRol()">
+        Toca para ver tu rol
+    </h2>
+
+    <button id="btnSiguiente" class="oculto" onclick="siguienteJugador()">
+        Siguiente jugador
+    </button>
+</div>
+
+<div class="container oculto" id="final">
+    <h1>Revelación final</h1>
+    <ul id="listaJugadores"></ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
