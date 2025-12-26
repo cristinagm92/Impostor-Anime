@@ -1,3 +1,7 @@
+/* ============================
+   ESTILOS BASE
+   ============================ */
+
 body {
     margin: 0;
     background-color: #000;
@@ -47,4 +51,52 @@ li {
     margin: 8px 0;
     cursor: pointer;
     border-radius: 6px;
+}
+
+/* ============================
+   SELECTS AGRANDADOS EN MÓVIL
+   ============================ */
+
+.select-grande {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform: scale(1.5);          /* Aumenta el tamaño REAL del select */
+    transform-origin: top center;
+    margin: 25px 0;
+}
+
+/* ============================
+   BOTONES Y TEXTO GRANDES EN MÓVIL
+   ============================ */
+
+@media (max-width: 768px) {
+
+    .container {
+        transform: scale(1.15);     /* Aumenta todo el contenido */
+        transform-origin: top center;
+    }
+
+    select, button {
+        width: 100%;
+        font-size: 30px;
+        padding: 26px 32px;
+        border-radius: 14px;
+        border: 3px solid #666;
+        background: #1c1c1c;
+        font-weight: bold;
+    }
+
+    #rolTexto {
+        font-size: 34px;
+        padding: 30px;
+        text-align: center;
+    }
+
+    li {
+        width: 100%;
+        font-size: 26px;
+        padding: 24px 30px;
+        border-radius: 12px;
+    }
 }

@@ -53,6 +53,48 @@
             margin: 5px 0;
             cursor: pointer;
         }
+
+        /* 📱 Selects grandes en móvil */
+        .select-grande {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            transform: scale(1.5);
+            transform-origin: top center;
+            margin: 25px 0;
+        }
+
+        /* 📱 Botones y texto grandes en móvil */
+        @media (max-width: 768px) {
+
+            .container {
+                transform: scale(1.15);
+                transform-origin: top center;
+            }
+
+            button {
+                width: 100%;
+                font-size: 30px;
+                padding: 26px 32px;
+                border-radius: 14px;
+                border: 3px solid #666;
+                background: #1c1c1c;
+                font-weight: bold;
+            }
+
+            #rolTexto {
+                font-size: 34px;
+                padding: 30px;
+                text-align: center;
+            }
+
+            li {
+                width: 100%;
+                font-size: 26px;
+                padding: 24px 30px;
+                border-radius: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -61,7 +103,6 @@
 <div id="selectorRonda" style="position:fixed; top:10px; right:10px; z-index:1000;">
     <select id="selectRonda" onchange="irARonda()">
         <option value="" disabled selected>Elegir ronda</option>
-        <!-- Solo números de ronda -->
         <option value="1">Ronda 1</option>
         <option value="2">Ronda 2</option>
         <option value="3">Ronda 3</option>
@@ -110,21 +151,28 @@
 </audio>
 
 <div class="container" id="inicio">
-    <select id="numJugadores">
-        <option value="" disabled selected>Número de jugadores</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-    </select>
 
-    <select id="numImpostores">
-        <option value="1">1 impostor</option>
-        <option value="2">2 impostores</option>
-        <option value="3">3 impostores</option>
-    </select>
+    <div class="select-grande">
+        <select id="numJugadores">
+            <option value="" disabled selected>Número de jugadores</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+
+    <div class="select-grande">
+        <select id="numImpostores">
+            <option value="1">1 impostor</option>
+            <option value="2">2 impostores</option>
+            <option value="3">3 impostores</option>
+        </select>
+    </div>
 
     <button onclick="iniciarJuego()">Ronda 1</button>
 </div>
