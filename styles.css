@@ -99,3 +99,22 @@ li {
         border-radius: 12px;
     }
 }
+/* ============================
+   BOTÓN DE SONIDO
+   ============================ */
+
+.btn-sonido {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #eee;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.btn-sonido:active {
+    transform: scale(0.9);
+}

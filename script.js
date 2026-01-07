@@ -3,7 +3,37 @@ let jugadorActual = 0;
 let rolVisible = false;
 let ronda = 1;
 
-// Palabras por ronda
+/* ============================
+   SONIDO GLOBAL
+   ============================ */
+
+let sonidoActivo = localStorage.getItem("sonido") !== "off";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("btnSonido");
+    if (btn) btn.innerText = sonidoActivo ? "🔊" : "🔇";
+});
+
+function toggleSonido() {
+    sonidoActivo = !sonidoActivo;
+    localStorage.setItem("sonido", sonidoActivo ? "on" : "off");
+
+    const btn = document.getElementById("btnSonido");
+    if (btn) btn.innerText = sonidoActivo ? "🔊" : "🔇";
+
+    const sonido = document.getElementById("sonidoRol");
+
+    // Si se apaga el sonido, detener audio inmediatamente
+    if (!sonidoActivo) {
+        sonido.pause();
+        sonido.currentTime = 0;
+    }
+}
+
+/* ============================
+   PALABRAS Y PISTAS
+   ============================ */
+
 const palabrasRonda = [
     "Eren","Kamehameha","Doraemon","Charizar","Kakashi","Namek",
     "Retumbar","Digievolución","Megumi","Pochita","Dorayaki","Draken",
@@ -14,7 +44,6 @@ const palabrasRonda = [
     "Kisaki","Zeno","Mewtwo","Fruta del diablo","Titán fundador","Sukuna"
 ];
 
-// Pistas por ronda
 const pistasRonda = [
     "mar","energía","azul","dragón","ojo","verde",
     "golpear","mejora","sombras","cortar","dulce","delincuente",
@@ -24,6 +53,10 @@ const pistasRonda = [
     "lugar","villanos","armadura","mujeres",
     "celos","Dragon Ball","creación","comida","enorme","poderoso"
 ];
+
+/* ============================
+   LÓGICA DEL JUEGO
+   ============================ */
 
 function iniciarJuego() {
     const numJugadores = parseInt(document.getElementById("numJugadores").value);
@@ -60,7 +93,6 @@ function prepararJugador() {
         `Jugador ${jugadorActual + 1}`;
 
     document.getElementById("rolTexto").innerText = "Toca para ver tu rol";
-
     document.getElementById("btnSiguiente").classList.add("oculto");
     rolVisible = false;
 }
@@ -71,11 +103,13 @@ function mostrarRol() {
 
     if (!rolVisible) {
         const rolReal = jugadores[jugadorActual];
-
         rolTexto.innerText = rolReal;
 
-        sonido.currentTime = 0;
-        sonido.play();
+        if (sonidoActivo) {
+            sonido.currentTime = 0;
+            sonido.play();
+        }
+
         rolVisible = true;
     } else {
         rolTexto.innerText = "Pasa el móvil al siguiente jugador";
