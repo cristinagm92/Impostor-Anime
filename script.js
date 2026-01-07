@@ -150,15 +150,16 @@ function mostrarFinal() {
         li.onclick = () => {
             const esImpostor = rol.startsWith("Impostor");
 
+            // Vibración ANTES de revelar
+            if (esImpostor && navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+
+            // Revelar rol
             li.innerHTML = `Jugador ${index + 1} → 
                 <span style="color:${esImpostor ? "red" : "green"}; font-weight:bold;">
                     ${esImpostor ? "Impostor" : "Buena gente"}
                 </span>`;
-
-            // Vibración si es impostor
-            if (esImpostor && navigator.vibrate) {
-                navigator.vibrate(200);
-            }
         };
 
         lista.appendChild(li);
