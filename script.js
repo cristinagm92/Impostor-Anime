@@ -100,17 +100,25 @@ function prepararJugador() {
 function mostrarRol() {
     const rolTexto = document.getElementById("rolTexto");
     const sonido = document.getElementById("sonidoRol");
+    const rolReal = jugadores[jugadorActual];
 
     if (!rolVisible) {
-        const rolReal = jugadores[jugadorActual];
-        rolTexto.innerText = rolReal;
 
+        // Mostrar impostor en rojo
+        if (rolReal.startsWith("Impostor")) {
+            rolTexto.innerHTML = `<span style="color:red; font-weight:bold;">${rolReal}</span>`;
+        } else {
+            rolTexto.innerHTML = rolReal;
+        }
+
+        // Reproducir sonido si está activo
         if (sonidoActivo) {
             sonido.currentTime = 0;
             sonido.play();
         }
 
         rolVisible = true;
+
     } else {
         rolTexto.innerText = "Pasa el móvil al siguiente jugador";
         document.getElementById("btnSiguiente").classList.remove("oculto");
@@ -140,7 +148,17 @@ function mostrarFinal() {
         li.innerText = `Jugador ${index + 1}`;
 
         li.onclick = () => {
-            li.innerHTML = `Jugador ${index + 1} → <span style="color:${rol.startsWith("Impostor") ? "red" : "green"}">${rol.startsWith("Impostor") ? "Impostor" : "Buena gente"}</span>`;
+            const esImpostor = rol.startsWith("Impostor");
+
+            li.innerHTML = `Jugador ${index + 1} → 
+                <span style="color:${esImpostor ? "red" : "green"}; font-weight:bold;">
+                    ${esImpostor ? "Impostor" : "Buena gente"}
+                </span>`;
+
+            // Vibración si es impostor
+            if (esImpostor && navigator.vibrate) {
+                navigator.vibrate(200);
+            }
         };
 
         lista.appendChild(li);
