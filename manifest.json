@@ -2,7 +2,8 @@
 {
   "name": "Impostor Game",
   "short_name": "Impostor",
-  "start_url": "/index.html",
+  "start_url": "/Impostor-Anime/index.html"
+,
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#ff0000",
