@@ -2,11 +2,13 @@ self.addEventListener("install", e => {
   e.waitUntil(
     caches.open("impostor-cache").then(cache => {
       return cache.addAll([
-        "./",
-        "./index.html",
-        "./script.js",
-        "./style.css",
-        "./sonido.mp3"
+        "/Impostor-Anime/",
+        "/Impostor-Anime/index.html",
+        "/Impostor-Anime/script.js",
+        "/Impostor-Anime/styles.css",
+        "/Impostor-Anime/suspense-248067.mp3",
+        "/Impostor-Anime/icon-192.png",
+        "/Impostor-Anime/icon-512.png"
       ]);
     })
   );
@@ -19,3 +21,4 @@ self.addEventListener("fetch", e => {
     })
   );
 });
+
