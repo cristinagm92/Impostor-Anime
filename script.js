@@ -196,6 +196,7 @@ function mostrarFinal() {
         lista.appendChild(li);
     });
 
+    // Botón: Nueva ronda aleatoria
     let btnNuevaRonda = document.createElement("button");
     btnNuevaRonda.style.marginTop = "20px";
     btnNuevaRonda.innerText = "Nueva ronda aleatoria";
@@ -204,5 +205,15 @@ function mostrarFinal() {
         iniciarJuego();
     };
 
+    // Botón: Cambiar jugadores
+    let btnCambiar = document.createElement("button");
+    btnCambiar.style.marginTop = "20px";
+    btnCambiar.innerText = "Cambiar jugadores";
+    btnCambiar.onclick = () => {
+        document.getElementById("final").classList.add("oculto");
+        document.getElementById("inicio").classList.remove("oculto");
+    };
+
     document.getElementById("final").appendChild(btnNuevaRonda);
+    document.getElementById("final").appendChild(btnCambiar);
 }
