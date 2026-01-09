@@ -1,7 +1,6 @@
 let jugadores = [];
 let jugadorActual = 0;
 let rolVisible = false;
-let ronda = 1;
 
 /* ============================
    SONIDO GLOBAL
@@ -23,7 +22,6 @@ function toggleSonido() {
 
     const sonido = document.getElementById("sonidoRol");
 
-    // Si se apaga el sonido, detener audio inmediatamente
     if (!sonidoActivo) {
         sonido.pause();
         sonido.currentTime = 0;
@@ -41,7 +39,22 @@ const palabrasRonda = [
     "Zoro","Akaza","Potara","Senku","Oliver/Tsubasa","Shoto Todoroki",
     "Pokeball","Black Clover","Boticaria","Aizawa","Ryuk","Erwin",
     "Aldea de la hoja","Team Rocket","Caballeros del zodiaco","Nana",
-    "Kisaki","Zeno","Mewtwo","Fruta del diablo","Titán fundador","Sukuna"
+    "Kisaki","Zeno","Mewtwo","Fruta del diablo","Titán fundador","Sukuna",
+
+    // NUEVAS 13 PALABRAS
+    "Sharingan",
+    "Arise",
+    "Ichigo",
+    "Marley",
+    "Muzan",
+    "Dominio",
+    "Alphonse Elric",
+    "Anya Forger",
+    "Blue Box",
+    "Gotenks",
+    "Inuyasha",
+    "Nen",
+    "Sailor Moon"
 ];
 
 const pistasRonda = [
@@ -51,7 +64,22 @@ const pistasRonda = [
     "espadas","luna","objeto","crear","partido","dual",
     "objeto","magia","ungüento","profesor","divino","liderazgo",
     "lugar","villanos","armadura","mujeres",
-    "celos","Dragon Ball","creación","comida","enorme","poderoso"
+    "celos","Dragon Ball","creación","comida","enorme","poderoso",
+
+    // NUEVAS 13 PISTAS
+    "Copiar",
+    "Habilidad",
+    "Híbrido",
+    "Guerra",
+    "Inmortalidad",
+    "Espacio cerrado",
+    "Armadura",
+    "Niña",
+    "Deporte",
+    "Dos",
+    "Orejas",
+    "Energía vital",
+    "Guerrera"
 ];
 
 /* ============================
@@ -64,8 +92,10 @@ function iniciarJuego() {
 
     if (!numJugadores || numImpostores >= numJugadores) return;
 
-    let palabraNormal = palabrasRonda[ronda - 1];
-    let pistaImpostor = pistasRonda[ronda - 1];
+    // RONDA ALEATORIA
+    let indice = Math.floor(Math.random() * palabrasRonda.length);
+    let palabraNormal = palabrasRonda[indice];
+    let pistaImpostor = pistasRonda[indice];
 
     jugadores = Array(numJugadores).fill(palabraNormal);
 
@@ -104,14 +134,12 @@ function mostrarRol() {
 
     if (!rolVisible) {
 
-        // Mostrar impostor en rojo
         if (rolReal.startsWith("Impostor")) {
             rolTexto.innerHTML = `<span style="color:red; font-weight:bold;">${rolReal}</span>`;
         } else {
             rolTexto.innerHTML = rolReal;
         }
 
-        // Reproducir sonido si está activo
         if (sonidoActivo) {
             sonido.currentTime = 0;
             sonido.play();
@@ -150,12 +178,10 @@ function mostrarFinal() {
         li.onclick = () => {
             const esImpostor = rol.startsWith("Impostor");
 
-            // Vibración ANTES de revelar
             if (esImpostor && navigator.vibrate) {
                 navigator.vibrate(200);
             }
 
-            // Revelar rol
             li.innerHTML = `Jugador ${index + 1} → 
                 <span style="color:${esImpostor ? "red" : "green"}; font-weight:bold;">
                     ${esImpostor ? "Impostor" : "Buena gente"}
@@ -165,38 +191,13 @@ function mostrarFinal() {
         lista.appendChild(li);
     });
 
-    let btnSiguienteRonda = document.createElement("button");
-    btnSiguienteRonda.style.marginTop = "20px";
+    let btnNuevaRonda = document.createElement("button");
+    btnNuevaRonda.style.marginTop = "20px";
+    btnNuevaRonda.innerText = "Nueva ronda aleatoria";
+    btnNuevaRonda.onclick = () => {
+        document.getElementById("final").classList.add("oculto");
+        iniciarJuego();
+    };
 
-    if (ronda < palabrasRonda.length) {
-        btnSiguienteRonda.innerText = `Ronda ${ronda + 1}`;
-        btnSiguienteRonda.onclick = () => {
-            ronda++;
-            iniciarJuego();
-        };
-    } else {
-        btnSiguienteRonda.innerText = "Reiniciar Juego";
-        btnSiguienteRonda.onclick = () => {
-            ronda = 1;
-            document.getElementById("final").classList.add("oculto");
-            document.getElementById("inicio").classList.remove("oculto");
-        };
-    }
-
-    document.getElementById("final").appendChild(btnSiguienteRonda);
-}
-
-function irARonda() {
-    const select = document.getElementById("selectRonda");
-    const valor = parseInt(select.value);
-
-    if (!valor || valor < 1 || valor > palabrasRonda.length) return;
-
-    ronda = valor;
-
-    document.getElementById("inicio").classList.add("oculto");
-    document.getElementById("juego").classList.remove("oculto");
-    document.getElementById("final").classList.add("oculto");
-
-    iniciarJuego();
+    document.getElementById("final").appendChild(btnNuevaRonda);
 }

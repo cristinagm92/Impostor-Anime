@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+
+  <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,14 +9,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="imagenapp.png">
     <link rel="manifest" href="manifest.webmanifest">
-
-
-
-    
 </head>
 <body>
-    <button id="btnSonido" onclick="toggleSonido()" class="btn-sonido">🔊</button>
 
+<button id="btnSonido" onclick="toggleSonido()" class="btn-sonido">🔊</button>
 
 <div id="inicio" class="container">
     <h1>Juego de Impostores</h1>
@@ -39,19 +37,7 @@
         </select>
     </div>
 
-    <div class="select-grande">
-        <select id="selectRonda">
-            <option value="">Ir a ronda...</option>
-            <script>
-                for (let i = 1; i <= 40; i++) {
-                    document.write(`<option value="${i}">Ronda ${i}</option>`);
-                }
-            </script>
-        </select>
-    </div>
-
     <button onclick="iniciarJuego()">Iniciar</button>
-    <button onclick="irARonda()">Ir a ronda</button>
 </div>
 
 <div id="juego" class="container oculto">
@@ -77,8 +63,6 @@
   }
 </script>
 
-
 </body>
 </html>
-
-    
+  
