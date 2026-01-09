@@ -164,11 +164,16 @@ function siguienteJugador() {
 }
 
 function mostrarFinal() {
+    // Reiniciar contenido visual del final
+    document.getElementById("final").innerHTML = `
+        <h2>Resultados</h2>
+        <ul id="listaJugadores"></ul>
+    `;
+
     document.getElementById("juego").classList.add("oculto");
     document.getElementById("final").classList.remove("oculto");
 
     const lista = document.getElementById("listaJugadores");
-    lista.innerHTML = "";
 
     jugadores.forEach((rol, index) => {
         const li = document.createElement("li");
