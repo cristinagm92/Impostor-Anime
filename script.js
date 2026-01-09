@@ -161,13 +161,20 @@ function siguienteJugador() {
 }
 
 function mostrarFinal() {
+    // Reiniciar contenido visual del final
     document.getElementById("final").innerHTML = `
         <h2>Resultados</h2>
+        <p id="jugadorInicio" style="font-size:24px; font-weight:bold; color:#0f0;"></p>
         <ul id="listaJugadores"></ul>
     `;
 
     document.getElementById("juego").classList.add("oculto");
     document.getElementById("final").classList.remove("oculto");
+
+    // Elegir jugador que empieza la ronda
+    const jugadorQueEmpieza = Math.floor(Math.random() * jugadores.length) + 1;
+    document.getElementById("jugadorInicio").innerText =
+        `Empieza el jugador ${jugadorQueEmpieza}`;
 
     const lista = document.getElementById("listaJugadores");
 
