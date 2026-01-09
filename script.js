@@ -41,20 +41,9 @@ const palabrasRonda = [
     "Aldea de la hoja","Team Rocket","Caballeros del zodiaco","Nana",
     "Kisaki","Zeno","Mewtwo","Fruta del diablo","Titán fundador","Sukuna",
 
-    // NUEVAS 13 PALABRAS
-    "Sharingan",
-    "Arise",
-    "Ichigo",
-    "Marley",
-    "Muzan",
-    "Dominio",
-    "Alphonse Elric",
-    "Anya Forger",
-    "Blue Box",
-    "Gotenks",
-    "Inuyasha",
-    "Nen",
-    "Sailor Moon"
+    "Sharingan","Arise","Ichigo","Marley","Muzan","Dominio",
+    "Alphonse Elric","Anya Forger","Blue Box","Gotenks",
+    "Inuyasha","Nen","Sailor Moon"
 ];
 
 const pistasRonda = [
@@ -66,21 +55,30 @@ const pistasRonda = [
     "lugar","villanos","armadura","mujeres",
     "celos","Dragon Ball","creación","comida","enorme","poderoso",
 
-    // NUEVAS 13 PISTAS
-    "Copiar",
-    "Habilidad",
-    "Híbrido",
-    "Guerra",
-    "Inmortalidad",
-    "Espacio cerrado",
-    "Armadura",
-    "Niña",
-    "Deporte",
-    "Dos",
-    "Orejas",
-    "Energía vital",
-    "Guerrera"
+    "Copiar","Habilidad","Híbrido","Guerra","Inmortalidad",
+    "Espacio cerrado","Armadura","Niña","Deporte","Dos",
+    "Orejas","Energía vital","Guerrera"
 ];
+
+/* ============================
+   ANIMACIÓN DE TRANSICIÓN
+   ============================ */
+
+function animacionTransicion(callback) {
+    const capa = document.getElementById("transicion");
+
+    capa.classList.add("activa");
+
+    setTimeout(() => {
+        capa.classList.add("fadeout");
+
+        setTimeout(() => {
+            capa.classList.remove("activa", "fadeout");
+            callback();
+        }, 400);
+
+    }, 400);
+}
 
 /* ============================
    LÓGICA DEL JUEGO
@@ -92,7 +90,6 @@ function iniciarJuego() {
 
     if (!numJugadores || numImpostores >= numJugadores) return;
 
-    // RONDA ALEATORIA
     let indice = Math.floor(Math.random() * palabrasRonda.length);
     let palabraNormal = palabrasRonda[indice];
     let pistaImpostor = pistasRonda[indice];
@@ -164,7 +161,6 @@ function siguienteJugador() {
 }
 
 function mostrarFinal() {
-    // Reiniciar contenido visual del final
     document.getElementById("final").innerHTML = `
         <h2>Resultados</h2>
         <ul id="listaJugadores"></ul>
@@ -196,16 +192,13 @@ function mostrarFinal() {
         lista.appendChild(li);
     });
 
-    // Botón: Nueva ronda aleatoria
     let btnNuevaRonda = document.createElement("button");
     btnNuevaRonda.style.marginTop = "20px";
     btnNuevaRonda.innerText = "Nueva ronda aleatoria";
     btnNuevaRonda.onclick = () => {
-        document.getElementById("final").classList.add("oculto");
-        iniciarJuego();
+        animacionTransicion(() => iniciarJuego());
     };
 
-    // Botón: Cambiar jugadores
     let btnCambiar = document.createElement("button");
     btnCambiar.style.marginTop = "20px";
     btnCambiar.innerText = "Cambiar jugadores";
