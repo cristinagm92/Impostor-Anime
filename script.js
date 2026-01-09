@@ -175,6 +175,7 @@ function mostrarFinal() {
     const jugadorQueEmpieza = Math.floor(Math.random() * jugadores.length) + 1;
     document.getElementById("jugadorInicio").innerText =
         `Empieza el jugador ${jugadorQueEmpieza}`;
+document.getElementById("jugadorInicio").classList.add("anuncio-jugador");
 
     const lista = document.getElementById("listaJugadores");
 
