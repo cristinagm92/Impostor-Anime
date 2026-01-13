@@ -7,6 +7,8 @@
   "background_color": "#000000",
   "orientation": "portrait",
   "description": "Juego de impostores estilo anime. Descubre quién miente y gana la partida.",
+  "version": "1.1.0",
+  "version_code": 2,
   "id": "https://cristinagm92.github.io/Impostor-Anime",
   "categories": ["game", "entertainment"],
   "prefer_related_applications": false,
